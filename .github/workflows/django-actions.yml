@@ -28,7 +28,7 @@ jobs:
           pip install -r requirements.txt
       - name: Run Tests
         run: |
-          pytest
+          pytest --cov --cov-report=xml:coverage.xml --junitxml=./pytest-report.xml
       - name: Setup sonarqube
         uses: warchant/setup-sonar-scanner@v3
       - name: Run sonarqube
@@ -40,8 +40,10 @@ jobs:
           -Dsonar.login=${{ secrets.SONAR_TOKEN }}
           -Dsonar.organization=longnguyen97
           -Dsonar.host.url=https://sonarcloud.io/
-          -Dsonar.projectKey=LongNguyen97_test_cicd\
+          -Dsonar.projectKey=LongNguyen97_test_cicd
           -Dsonar.qualitygate.wait=true
+          -Dsonar.python.coverage.reportPaths=${{ github.workspace }}/coverage.xml
+          -Dsonar.python.xunit.reportPath=${{ github.workspace }}/pytest-report.xml
       - name: Build and Push Docker Image
         uses: mr-smithers-excellent/docker-build-push@v5
         with:
