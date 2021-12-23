@@ -32,6 +32,7 @@ jobs:
       - name: Setup sonarqube
         uses: warchant/setup-sonar-scanner@v3
       - name: Run sonarqube
+        id: sona-runner
         env:
           # to get access to secrets.SONAR_TOKEN, provide GITHUB_TOKEN
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -40,7 +41,6 @@ jobs:
           -Dsonar.organization=longnguyen97
           -Dsonar.host.url=https://sonarcloud.io/
           -Dsonar.projectKey=LongNguyen97_test_cicd\
-          -Dsonar.projectBaseDir=.
           -Dsonar.qualitygate.wait=true
       - name: Build and Push Docker Image
         uses: mr-smithers-excellent/docker-build-push@v5
