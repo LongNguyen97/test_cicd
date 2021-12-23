@@ -39,7 +39,9 @@ jobs:
           -Dsonar.login=${{ secrets.SONAR_TOKEN }}
           -Dsonar.organization=longnguyen97
           -Dsonar.host.url=https://sonarcloud.io/
-          -Dsonar.projectKey=LongNguyen97_test_cicd
+          -Dsonar.projectKey=LongNguyen97_test_cicd\
+          -Dsonar.projectBaseDir=.
+          -Dsonar.qualitygate.wait=true
       - name: Build and Push Docker Image
         uses: mr-smithers-excellent/docker-build-push@v5
         with:
