@@ -1,0 +1,47 @@
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 4
+      matrix:
+        python-version: [ 3.8 ]
+    steps:
+      - name: Set up repository
+        uses: actions/checkout@v2
+
+      - name: Set up python
+      - uses: actions/checkout@v2
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run Tests
+        run: |
+          pytest --cov --cov-report=xml:coverage.xml --junitxml=./pytest-report.xml
+
+      - name: Setup sonarqube
+        uses: warchant/setup-sonar-scanner@v3
+      - name: Run sonarqube
+        id: sona-runner
+        env:
+          # to get access to secrets.SONAR_TOKEN, provide GITHUB_TOKEN
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: sonar-scanner
+          -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+          -Dsonar.organization=longnguyen97
+          -Dsonar.host.url=https://sonarcloud.io/
+          -Dsonar.projectKey=LongNguyen97_test_cicd
+          -Dsonar.qualitygate.wait=true
+          -Dsonar.python.coverage.reportPaths=${{ github.workspace }}/coverage.xml
+          -Dsonar.python.xunit.reportPath=${{ github.workspace }}/pytest-report.xml
