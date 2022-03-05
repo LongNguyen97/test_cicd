@@ -27,6 +27,7 @@ jobs:
 
       - name: Setup sonarqube
         uses: warchant/setup-sonar-scanner@v3
+
       - name: Run sonarqube
         id: sona-runner
         env:
