@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - main
+      - master
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -15,11 +15,6 @@ jobs:
 
       - name: Set up python
       - uses: actions/checkout@v2
-
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
-        with:
-          python-version: ${{ matrix.python-version }}
 
       - name: Install Dependencies
         run: |
