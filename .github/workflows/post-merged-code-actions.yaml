@@ -5,7 +5,7 @@ jobs:
   which_branch:
     runs-on: ubuntu-latest
     env:
-      branch_to_push: main
+      branch_to_push: main1
     steps:
       # extract branch name
       - name: Extract branch name
