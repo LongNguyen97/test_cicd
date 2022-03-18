@@ -19,7 +19,7 @@ jobs:
         id: extract_branch
         
       - name: Gen target branch name
-        run: echo "GITHUB_SHA_SHORT=$(if [[ ${{ steps.extract_branch.outputs.branch }}==release*]]; then echo "release"; elif [[ ${{ steps.extract_branch.outputs.branch }} == hotfix* ]]; then echo "hotfix" ;else echo ${{ steps.extract_branch.outputs.branch }} ; fi)" >> $GITHUB_ENV
+        run: echo "GITHUB_SHA_SHORT=$( if [[ ${{ steps.extract_branch.outputs.branch }} == release* ]]; then echo "release"; elif [[ ${{ steps.extract_branch.outputs.branch }} == hotfix* ]]; then echo "hotfix" ;else echo ${{ steps.extract_branch.outputs.branch }} ; fi)" >> $GITHUB_ENV
         id: get_target_branch
 
       - uses: actions/checkout@v2
