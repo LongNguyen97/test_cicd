@@ -20,4 +20,4 @@ jobs:
         id: extract_branch_2
 
       - name: Test
-          run: echo $GITHUB_SHA_SHORT
+          run: echo ${GITHUB_SHA_SHORT}
