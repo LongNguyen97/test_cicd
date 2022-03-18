@@ -1,19 +1,22 @@
-on:
-  push:
-    branches:
-      - main
+name: getBranchName
+on: [pull_request, push]
+
 jobs:
-  build:
+  which_branch:
     runs-on: ubuntu-latest
-    strategy:
-      max-parallel: 4
-      matrix:
-        python-version: [ 3.8 ]
     steps:
+      # extract branch name
       - name: Extract branch name
+        if: github.event_name != 'pull_request'
         shell: bash
-        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        run: echo "::set-env name=BRANCH_NAME::$(echo ${GITHUB_REF#refs/heads/})"
         id: extract_branch
-        
-      - name: Extract branch name 2
-        run: echo ${BRANCH_NAME}
+
+      # extract branch name on pull request
+      - name: Print branch name
+        if: github.event_name == 'pull_request'
+        run: echo "::set-env name=BRANCH_NAME::$(echo ${GITHUB_HEAD_REF})"
+
+      # print branch name
+      - name: Get branch name
+        run: echo 'The branch name is' $BRANCH_NAME
