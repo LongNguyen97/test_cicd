@@ -2,14 +2,34 @@ name: getBranchName
 on: [push]
 
 jobs:
+
   which_branch:
     runs-on: ubuntu-latest
+    env:
+      branch_to_push: ${GITHUB_REF_NAME}
     steps:
       # extract branch name
       - name: Extract branch name
         if: github.event_name != 'pull_request'
         shell: bash
-        run: echo ${GITHUB_REF#refs/heads/}
+        run: echo ${GITHUB_REF#refs/heads/} and $branch_to_push
+        id: extract_branch
+
+
+name: getBranchName
+on: [push]
+
+jobs:
+  which_branch:
+    runs-on: ubuntu-latest
+    env:
+      branch_to_push: ${GITHUB_REF_NAME}
+    steps:
+      # extract branch name
+      - name: Extract branch name
+        if: github.event_name != 'pull_request'
+        shell: bash
+        run: echo ${GITHUB_REF#refs/heads/} and $branch_to_push
         id: extract_branch
         
       - name: Extract branch name 2
