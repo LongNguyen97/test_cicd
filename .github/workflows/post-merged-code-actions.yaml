@@ -4,12 +4,10 @@ on: [push]
 jobs:
   which_branch:
     runs-on: ubuntu-latest
-    env:
-      branch_to_push: ""
     steps:
       - run: |
           echo "branch_to_push=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
-          echo "branch_to_push= $(if [[ ${{ env.branch_to_push }} == main ]]; then echo long; elif [[ ${{ env.branch_to_push }} == main2 ]]; then "viet"; else echo nguyen; fi)" >> $GITHUB_ENV
+          echo "branch_to_push= $(if [[ ${{ branch_to_push }} == main ]]; then echo long; elif [[ ${{ branch_to_push }} == main2 ]]; then "viet"; else echo nguyen; fi)" >> $GITHUB_ENV
       
       - name: Test
         run: echo ${branch_to_push}
