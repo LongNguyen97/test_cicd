@@ -1,33 +1,3 @@
-Skip to content
-Search or jump to…
-Pull requests
-Issues
-Marketplace
-Explore
- 
-@LongNguyen97 
-LongNguyen97
-/
-test_cicd
-Public
-Code
-Issues
-Pull requests
-2
-Actions
-Projects
-Wiki
-Security
-Insights
-Settings
-test_cicd/.github/workflows/post-merged-code-actions.yaml
-@LongNguyen97
-LongNguyen97 Update post-merged-code-actions.yaml
-Latest commit bb91ca9 3 minutes ago
- History
- 1 contributor
-21 lines (17 sloc)  522 Bytes
-   
 name: getBranchName
 on: [push]
 
