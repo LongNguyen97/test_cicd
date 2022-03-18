@@ -5,10 +5,9 @@ jobs:
   which_branch:
     runs-on: ubuntu-latest
     steps:
-      - run: |
-          echo "AAABBB=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
-          echo "AAABBB= $(if [[ ${{ AAABBB }} == main ]]; then echo long; elif [[ ${{ AAABBB }} == main2 ]]; then "viet"; else echo nguyen; fi)" >> $GITHUB_ENV
-      
-      - name: Test
-        run: echo ${AAABBB}
+      - name: Extract branch name 2
+      ` run: echo "GITHUB_SHA_SHORT= $(if [[ ${{GITHUB_REF#refs/heads/}} == main ]]; then echo long; elif [[ ${{GITHUB_REF#refs/heads/}} == main2 ]]; then "viet"; else echo nguyen; fi)" >> $GITHUB_ENV
+        id: extract_branch_2
 
+      - name: Test
+        run: echo ${GITHUB_SHA_SHORT}
