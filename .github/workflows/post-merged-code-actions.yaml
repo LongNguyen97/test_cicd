@@ -11,3 +11,10 @@ jobs:
         shell: bash
         run: echo ${GITHUB_REF#refs/heads/}
         id: extract_branch
+        
+      - name: Extract branch name 2
+        if: github.event_name != 'pull_request'
+        shell: bash
+        run: echo ${GITHUB_REF_NAME}
+        id: extract_branch_2
+ 
