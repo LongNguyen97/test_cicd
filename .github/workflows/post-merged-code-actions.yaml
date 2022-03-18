@@ -49,4 +49,4 @@ jobs:
           -Dsonar.qualitygate.wait=true
           -Dsonar.python.coverage.reportPaths=${{ github.workspace }}/coverage.xml
           -Dsonar.python.xunit.reportPath=${{ github.workspace }}/pytest-report.xml
-          -Dsonar.branch.name= ${{env.GITHUB_SHA_SHORT}}
+          -Dsonar.branch.name=${{env.GITHUB_SHA_SHORT}}
