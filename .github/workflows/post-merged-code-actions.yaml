@@ -5,14 +5,14 @@ jobs:
   which_branch:
     runs-on: ubuntu-latest
     steps:
-      - name: Extract branch name
+      - name: Extract current branch name
         shell: bash
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
         id: extract_branch
         
-      - name: Extract branch name 2
-        run: echo "GITHUB_SHA_SHORT= $(if [[ ${{ steps.extract_branch.outputs.branch }} == main ]]; then echo long; elif [[ ${{ steps.extract_branch.outputs.branch }} == main2 ]]; then "viet"; else echo nguyen; fi)" >> $GITHUB_ENV
-        id: extract_branch_2
+      - name: Gen target branch name
+        run: echo "GITHUB_SHA_SHORT= $(if [[ ${{ steps.extract_branch.outputs.branch }} == release* ]]; then echo release; elif [[ ${{ steps.extract_branch.outputs.branch }} == hotfix* ]]; then hotfix; else echo ${{ steps.extract_branch.outputs.branch }} ; fi)" >> $GITHUB_ENV
+        id: get_target_branch
 
       - name: Test
         run: echo ${GITHUB_SHA_SHORT}
