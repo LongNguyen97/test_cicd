@@ -12,6 +12,8 @@ jobs:
       matrix:
         python-version: [ 3.8 ]
 
+    env:
+      branch_name: release
     steps:
       - name: Extract current branch name
         shell: bash
@@ -49,4 +51,4 @@ jobs:
           -Dsonar.qualitygate.wait=true
           -Dsonar.python.coverage.reportPaths=${{ github.workspace }}/coverage.xml
           -Dsonar.python.xunit.reportPath=${{ github.workspace }}/pytest-report.xml
-          -Dsonar.branch.name=${ GITHUB_SHA_SHORT }
+          -Dsonar.branch.name=${{env.branch_name}}
