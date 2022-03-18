@@ -7,12 +7,9 @@ jobs:
     env:
       branch_to_push: ${{GITHUB_REF#refs/heads/}}
     steps:
-      - name: Extract branch name 2
-        # run: if [[ ${{ env.branch_to_push }} == main ]]; then echo long; else echo nguyen; fi
-        run: |
-          echo "GITHUB_SHA_SHORT= ${GITHUB_REF#refs/heads/}"
+      - run: |
+        echo "GITHUB_SHA_SHORT= ${GITHUB_REF#refs/heads/}"
       - run: echo "GITHUB_SHA_SHORT= $(if [[ ${{ env.branch_to_push }} == main ]]; then echo long; elif [[ ${{ env.branch_to_push }} == main2 ]]; then "viet"; else echo nguyen; fi)" >> $GITHUB_ENV
-        id: extract_branch_2
-
+      
       - name: Test
         run: echo ${GITHUB_SHA_SHORT}
