@@ -5,7 +5,7 @@ jobs:
   which_branch:
     runs-on: ubuntu-latest
     env:
-      branch_to_push: ${GITHUB_REF_NAME}
+      branch_to_push: ${{ GITHUB_REF_NAME }}
     steps:
       # extract branch name
       - name: Extract branch name
